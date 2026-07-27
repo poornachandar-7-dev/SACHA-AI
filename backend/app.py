@@ -2,6 +2,9 @@
 SACHA — FastAPI backend entry point.
 """
 
+import os
+import signal
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -43,7 +46,7 @@ def chat(request: ChatRequest):
     user_message = request.message
     save_message("user", user_message)
 
-    # Check if the message is asking fro a tool action(e.g. "open notepad & Youtube & etc")
+    # Check if the message is asking for a tool action (e.g. "open notepad" / "open youtube" / etc.)
     tool_name, tool_arg = detect_tool_call(user_message)
     if tool_name:
         reply = run_tool(tool_name, tool_arg)
@@ -54,3 +57,9 @@ def chat(request: ChatRequest):
 
     save_message("assistant", reply)
     return ChatResponse(reply=reply)
+
+
+@app.post("/shutdown")
+def shutdown():
+    os.kill(os.getpid(), signal.SIGINT)
+    return {"status": "shutting down"}

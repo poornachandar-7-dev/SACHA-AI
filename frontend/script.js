@@ -148,3 +148,7 @@ if (SpeechRecognition) {
 } else {
     micBtn.style.opacity = "0.4";
 }
+
+window.addEventListener("beforeunload", () => {
+  navigator.sendBeacon("http://localhost:8000/shutdown");
+});
