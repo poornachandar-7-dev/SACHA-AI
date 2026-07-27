@@ -1,0 +1,4 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "livePreview.defaultPreviewPath": "/frontend/index.html"
+}
