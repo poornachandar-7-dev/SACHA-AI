@@ -1,1 +1,4 @@
-SACHA-AI.zip .gitignore
+SACHA-AI.zip
+*.zip
+venv/
+SACHA.AI/
