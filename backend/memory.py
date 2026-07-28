@@ -17,7 +17,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
-DB_PATH = Path(os.environ.get("SACHA_DB_PATH", "")) or Path(__file__).resolve().parents[1] / "database" / "sacha.db"
+_env_db_path = os.environ.get("SACHA_DB_PATH", "").strip()
+DB_PATH = Path(_env_db_path) if _env_db_path else Path(__file__).resolve().parents[1] / "database" / "sacha.db"
+
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -1,1 +1,8 @@
 uvicorn app:app --reload --host 0.0.0.0 --port 8000
+===========for database=======
+cd backend
+sqlite3 E:\sacha-final\sacha-final\SACHA-AI\database\sacha.db
+.mode column
+.headers on
+SELECT * FROM messages;
+.quit
