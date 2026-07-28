@@ -2,3 +2,6 @@ SACHA-AI.zip
 *.zip
 venv/
 SACHA.AI/
+
+database/*.db
+database/*.db-*
