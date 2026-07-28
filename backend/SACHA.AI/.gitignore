@@ -1,0 +1,8 @@
+backend/SACHA.AI/
+*.venv/
+__pycache__/
+*.pyc
+database/*.db
+database/*.db-wal
+database/*.db-shm
+.env

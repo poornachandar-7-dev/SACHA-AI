@@ -60,20 +60,47 @@ Type a message and hit Send or Enter.
 ```
 sacha-ai/
 ├── backend/
-│   ├── app.py          # FastAPI app, main entry point
-│   ├── ai.py            # AI provider abstraction (Ollama by default)
-│   ├── memory.py         # SQLite chat history (DB_PATH bug fixed in v2)
-│   ├── tools.py           # Tool/automation logic (v2: open website + web-search fallback)
-│   ├── speech.py           # STT — not implemented yet
-│   ├── tts.py               # TTS — not implemented yet
+│   ├── app.py           # FastAPI app, main entry point
+│   ├── ai.py             # AI provider abstraction (Ollama by default)
+│   ├── memory.py          # SQLite chat history (DB_PATH bug fixed in v2)
+│   ├── tools.py            # Tool/automation logic (v2: open website + web-search fallback)
+│   ├── speech.py            # STT — not implemented yet
+│   ├── tts.py                # TTS — not implemented yet
+│   ├── tests/                 # 39-test suite covering tools, memory, and app (see Testing below)
 │   └── requirements.txt
 ├── frontend/
 │   ├── index.html
 │   ├── style.css
 │   └── script.js
-├── database/            # sacha.db created here automatically on first run
+├── database/             # sacha.db created here automatically on first run
+├── start.bat             # Windows one-click starter (activates venv, starts Ollama + backend)
 └── README.md
 ```
+
+## Testing
+SACHA has a test suite of **39 passing tests** covering the core backend logic:
+
+```
+backend/tests/
+├── test_tools_Basic.py          # URL normalization, intent detection, open_site, tool registry
+├── test_tools_images_input.py   # Regression test: filenames vs. domains
+├── test_tools_websites.py       # Domain-based site opening
+├── test_memory.py               # SQLite memory: save/get/delete/clear history, DB_PATH resolution
+├── test_app.py                  # FastAPI routes: /, /history, /chat (tool path + AI fallback), validation
+└── test_Start_Script_BatFile.py # Sanity check that start.bat exists and is non-empty
+```
+
+Run the full suite from the `backend` folder (with the venv activated):
+```
+python -m pytest tests/ -v
+```
+
+Install test dependencies:
+```
+pip install pytest httpx httpx2 pytest-mock
+```
+
+External calls (opening a browser, calling Ollama, touching the filesystem for images/webcam) are mocked, so the suite runs fast and needs no Ollama instance, camera, or network access.
 
 ## Switching AI provider or model
 In `backend/ai.py`, controlled by environment variables:

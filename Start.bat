@@ -1,6 +1,14 @@
 @echo off
-cd /d "%~dp0backend"
+echo Starting SACHA backend...
+
+REM Activate the virtual environment
 call SACHA.AI\Scripts\activate.bat
-start /min "" uvicorn app:app --reload --host 0.0.0.0 --port 8000
-timeout /t 3 >nul
-start "" "%~dp0frontend\index.html"
+
+REM Start Ollama in a new window (if not already running)
+start "Ollama" cmd /k "ollama serve"
+
+REM Give Ollama a moment to start
+timeout /t 3 /nobreak >nul
+
+REM Start the FastAPI backend
+uvicorn app:app --reload --host 0.0.0.0 --port 8000

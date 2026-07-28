@@ -283,6 +283,27 @@ def detect_tool_call(message: str) -> Tuple[Optional[str], Optional[str]]:
     if url_match:
         return "open_site", url_match.group(1)
 
+    # Image info: "read image <path>", "get info for image 'path'"
+    # (checked before the domain match so filenames like 'test.png' aren't
+    # misdetected as a website domain)
+    m = re.search(r"(?:get info|read|analyze|info for)\s+(?:image|photo|picture)\s+['\"]?([^'\"]+)['\"]?", msg_lower)
+    if m:
+        return "get_image_info", m.group(1).strip()
+
+    # Webcam capture: "take a picture named xyz.jpg" or "capture webcam device:1 name"
+    # (also checked before the domain match, for the same reason as above)
+    if re.search(r"\b(?:take|capture|snap)\b.*\b(?:picture|photo|webcam|selfie)\b", msg_lower):
+        # optional named <filename>
+        name_m = re.search(r"(?:named|called|as)\s+['\"]?([^'\"]+)['\"]?", msg_lower)
+        device_m = re.search(r"device:(\d+)", msg_lower)
+        parts = []
+        if device_m:
+            parts.append(f"device:{device_m.group(1)}")
+        if name_m:
+            parts.append(name_m.group(1).strip())
+        arg = " ".join(parts) if parts else "webcam_capture.jpg"
+        return "capture_webcam", arg
+
     # Domain-like without scheme: github.com or example.org
     domain_match = re.search(r"\b([\w.-]+\.[a-zA-Z]{2,})\b", msg)
     if domain_match:
@@ -295,24 +316,6 @@ def detect_tool_call(message: str) -> Tuple[Optional[str], Optional[str]]:
     m = re.search(r"\b(?:open|go to|launch)\s+['\"]?([^'\"]+)['\"]?", msg, re.IGNORECASE)
     if m:
         return "open_site", m.group(1).strip()
-
-    # Image info: "read image <path>", "get info for image 'path'"
-    m = re.search(r"(?:get info|read|analyze|info for)\s+(?:image|photo|picture)\s+['\"]?([^'\"]+)['\"]?", msg_lower)
-    if m:
-        return "get_image_info", m.group(1).strip()
-
-    # Webcam capture: "take a picture named xyz.jpg" or "capture webcam device:1 name"
-    if re.search(r"\b(?:take|capture|snap)\b.*\b(?:picture|photo|webcam|selfie)\b", msg_lower):
-        # optional named <filename>
-        name_m = re.search(r"(?:named|called|as)\s+['\"]?([^'\"]+)['\"]?", msg_lower)
-        device_m = re.search(r"device:(\d+)", msg_lower)
-        parts = []
-        if device_m:
-            parts.append(f"device:{device_m.group(1)}")
-        if name_m:
-            parts.append(name_m.group(1).strip())
-        arg = " ".join(parts) if parts else "webcam_capture.jpg"
-        return "capture_webcam", arg
 
     return None, None
 
