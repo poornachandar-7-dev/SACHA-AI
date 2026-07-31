@@ -1,0 +1,7 @@
+2026-07-31 10:34:57 | INFO     | __main__ | Booting SACHA (env=dev, debug=False)
+2026-07-31 10:34:57 | WARNING  | __main__ | core.providers not implemented yet — skipping provider registry
+2026-07-31 10:34:57 | WARNING  | __main__ | core.router not implemented yet — skipping OmniRouter
+2026-07-31 10:34:57 | WARNING  | __main__ | core.memory not implemented yet — skipping memory subsystem
+2026-07-31 10:34:57 | WARNING  | __main__ | core.tools not implemented yet — skipping tool registry
+2026-07-31 10:34:57 | WARNING  | __main__ | core.conversation not implemented yet — skipping session store
+2026-07-31 10:34:57 | INFO     | __main__ | Bootstrap complete

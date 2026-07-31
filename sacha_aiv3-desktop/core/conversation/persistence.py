@@ -1,0 +1,1 @@
+# persists session -> SQLite on shutdown
