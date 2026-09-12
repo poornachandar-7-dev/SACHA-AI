@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sacha-aiv3-desktop"
+version = "0.3.0"
+description = "SACHA V3 — Smart Autonomous Cognitive Helper Assistant (desktop edition)"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Proprietary" }
+authors = [{ name = "Sasank + PoornaChandar" }]
+dependencies = [
+    "pywebview",
+    "pydantic",
+    "pydantic-settings",
+    "python-dotenv",
+    "httpx",
+    "aiofiles",
+    "openai",
+    "google-generativeai",
+    "ollama",
+    "faster-whisper",
+    "vosk",
+    "piper-tts",
+    "openwakeword",
+    "pvporcupine",
+    "sounddevice",
+    "numpy",
+    "mediapipe",
+    "opencv-python",
+    "networkx",
+    "sqlalchemy",
+    "apscheduler",
+    "python-telegram-bot",
+    "structlog",
+    "pyperclip",
+    "Pillow",
+]
+
+[tool.setuptools.packages.find]
+include = [
+    "core*",
+    "app*",
+    "voice*",
+    "vision*",
+    "personality*",
+    "scheduler*",
+    "bridges*",
+    "plugins*",
+    "scripts*",
+    "tests*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true

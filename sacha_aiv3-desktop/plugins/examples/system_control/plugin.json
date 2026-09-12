@@ -1,0 +1,9 @@
+{
+  "name": "system_control",
+  "version": "0.1.0",
+  "author": "SACHA team",
+  "description": "Volume/brightness control example plugin.",
+  "entry": "plugin.py",
+  "permissions": ["exec"],
+  "enabled": true
+}

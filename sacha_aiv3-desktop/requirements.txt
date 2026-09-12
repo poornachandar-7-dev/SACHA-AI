@@ -1,0 +1,56 @@
+# sacha_aiv3-desktop — runtime dependencies
+# Install: uv pip install -r requirements.txt
+# Unpinned for Python 3.14 compatibility — pip/uv will resolve latest working versions.
+
+# --- Desktop shell ----------------------------------------------------
+pywebview
+
+# --- Config / settings --------------------------------------------------
+pydantic
+pydantic-settings
+python-dotenv
+
+# --- Async / HTTP ---------------------------------------------------------
+httpx
+aiofiles
+
+# --- Model providers (cloud) ------------------------------------------
+openai
+google-generativeai
+
+# --- Local / offline inference --------------------------------------------
+ollama
+
+# --- Voice: STT ------------------------------------------------------------
+faster-whisper
+vosk
+
+# --- Voice: TTS --------------------------------------------------------
+piper-tts
+
+# --- Voice: wake word --------------------------------------------------
+openwakeword
+pvporcupine
+
+# --- Audio I/O ------------------------------------------------------------
+sounddevice
+numpy
+
+# --- Vision / gesture -------------------------------------------------
+mediapipe
+opencv-python
+
+# --- Memory / storage --------------------------------------------------
+networkx
+sqlalchemy
+
+# --- Scheduler ------------------------------------------------------------
+apscheduler
+
+# --- Messaging bridges ---------------------------------------------------
+python-telegram-bot
+
+# --- Utilities ------------------------------------------------------------
+structlog
+pyperclip
+Pillow

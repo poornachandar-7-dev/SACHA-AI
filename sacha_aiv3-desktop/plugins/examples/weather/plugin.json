@@ -1,0 +1,9 @@
+{
+  "name": "weather",
+  "version": "0.1.0",
+  "author": "SACHA team",
+  "description": "Weather lookup example plugin (Open-Meteo, no key).",
+  "entry": "plugin.py",
+  "permissions": ["network"],
+  "enabled": true
+}

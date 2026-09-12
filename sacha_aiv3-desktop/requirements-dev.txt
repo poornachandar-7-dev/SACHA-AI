@@ -1,0 +1,9 @@
+# sacha_aiv3-desktop — development dependencies
+# Install: pip install -r requirements-dev.txt
+pytest
+pytest-asyncio
+pytest-cov
+ruff
+mypy
+coverage
+pyinstaller

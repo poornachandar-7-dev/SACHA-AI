@@ -1,0 +1,21 @@
+sacha_aiv3-desktop-folder-structure.md
+__pycache__/
+.venv/
+
+# Local secrets
+.env
+
+# Local data (SQLite, caches, logs, screenshots)
+data/
+*.db
+
+# Build artifacts
+build/
+dist/
+*.spec
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
